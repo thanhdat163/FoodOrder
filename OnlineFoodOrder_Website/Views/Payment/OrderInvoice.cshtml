@@ -1,0 +1,73 @@
+﻿@using OnlineFoodOrder_Website.Models
+@model IEnumerable<OrderInvoice>
+
+@{
+    ViewBag.Title = "OrderInvoice";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+<style>
+    th{
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+
+<div>
+    <section class="book_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <div class="align-self-end">
+                    <label></label>
+                </div>
+                <label><h2 style="font-family: 'Dancing Script', cursive;">Your Order Invoice</h2></label>
+            </div>
+        </div>
+        <div class="container">
+            <div class="table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover nowrap">
+                        <tr>
+                            <th>Order Code</th>
+                            <th>Item Name</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.OrderNo.ToString().ToLower()</td>
+                                <td>@item.ProductName</td>
+                                <td>$@item.Price</td>
+                                <td>@item.Quantity</td>
+                                <td>$@item.TotalItemPrice</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>$@ViewBag.TotalCart</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <a href="@Url.Action("LoadMenu", "Home")" class="btn btn-info"><i class="fa fa-arrow-circle-left mr-2"></i>Back to Home Page</a>
+                            </td>
+                            <td colspan="2">
+                            </td>
+                            <td colspan="2">
+                                <a href="@Url.Action("ExportToExcel", "Payment")" class="btn btn-success">DownLoad Invoice<i class="fa fa-paper-plane mr-2" style="margin-left:10px;"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

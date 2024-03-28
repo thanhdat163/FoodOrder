@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "AdminHome";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<div class="row" style="margin-top: 50px;">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 20px;">
+                            <a href="@Url.Action("AddCategory", "CategoryManager")" style="color: #3582ff">Categories</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">@ViewBag.Categories</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-sharp fa-solid fa-folder-open text-gray-300 fa-2x" style="color: #3582ff"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 20px;">
+                            <a href="@Url.Action("AddProduct", "CategoryManager")" style="color: #f75153;">Products</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">@ViewBag.Products</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-burger fa-2x text-gray-300" style="color: #f75153;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 20px; color: #3582ff">
+                            <a href="@Url.Action("OrderList", "OrderManager")" style="color: #3582ff;">Total Order</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">@ViewBag.TotalOrder</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-list fa-2x text-gray-300" style="color: #3582ff"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1" style="font-size: 20px;">
+                            <a href="@Url.Action("OrderList", "OrderManager")" style="color: #f75153;">Delivered Item</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">@ViewBag.Delevered</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-car fa-2x text-gray-300" style="color: #f75153;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 20px;">
+                            <a href="@Url.Action("OrderList", "OrderManager")" style="color: #f75153;">Pending Item</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">@ViewBag.Pending</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-pencil fa-2x text-gray-300" style="color: #f75153;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 20px;">
+                            <a href="@Url.Action("ListUser", "UserManager")" style="color: #3582ff">Users</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">@ViewBag.User</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user fa-2x text-gray-300" style="color: #3582ff"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1" style="font-size: 20px;">
+                            <a href="@Url.Action("ContactList", "ContactManager")" style="color: #f75153;">FeedBacks</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">@ViewBag.FeedBack</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300" style="color: #f75153;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 20px;">
+                            <a href="#" style="color: #3582ff">Solid Amount</a>
+                        </div>
+                        <div class="h5 mb-0 text-gray-800" style="font-size: 30px; font-weight: 500;">$@ViewBag.Total</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-money text-gray-300" style="font-size: 30px; color: #3582ff;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<!-- for amcharts js -->
+<!--<script src="~/Content/Admin/js/amcharts.js"></script>
+<script src="~/Content/Admin/js/serial.js"></script>
+<script src="~/Content/Admin/js/export.min.js"></script>
+<link rel="stylesheet" href="~/Content/Admin/css/export.css" type="text/css" media="all">
+<script src="~/Content/Admin/js/light.js"></script>-->
+<!-- for amcharts js -->
+<!--<script src="~/Content/Admin/js/index1.js"></script>-->

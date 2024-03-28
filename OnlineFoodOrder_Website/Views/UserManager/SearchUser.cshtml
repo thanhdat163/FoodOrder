@@ -1,0 +1,108 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<OnlineFoodOrder_Website.Models.User>
+
+
+@{
+    ViewBag.Title = "SearchUser";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<style>
+    label, th {
+        font-weight: unset;
+    }
+
+    th {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+
+<h2 style="text-align: center; font-weight: bold; margin-top: 20px;">User Management</h2>
+
+<div style="width: 90%; margin: auto; border: 1px solid black; margin-top: 50px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+    <div class="table-border-style">
+        <div class="table-responsive">
+            @using (Html.BeginForm("SearchUser", "UserManager", FormMethod.Post))
+            {
+                <p style="text-align: right;">
+                    Search by UserName: @Html.TextBox("SearchString")
+                    <input type="submit" value="Search" class="btn btn-primary" style="padding: 5px 15px; margin-bottom: 5px;" />
+                </p>
+            }
+            <table class="table table-hover nowrap">
+                <tr>
+                    <th>FullName</th>
+                    <th>Avatar</th>
+                    <th>UserName</th>
+                    <th>PhoneNumber</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>PostCode</th>
+                    <th>CreateDate</th>
+                    <th>IsAdmin</th>
+                    <th>Action</th>
+                </tr>
+                @if (Model == null)
+                {
+
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FullName</td>
+                            @if (@item.ImageUrl == null)
+                            {
+                                <td style="width: 15%;">
+                                    <div style="width: 100%; overflow: hidden; align-items: center;">
+                                        <img style="width: 100%; height: 220px;" src="@Url.Content("../Image/Avatar_Null.png")" />
+                                    </div>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="width: 15%;">
+                                    <div style="width: 100%; overflow: hidden; align-items: center;">
+                                        <img style="width: 100%; height: 220px;" src="@Url.Content("../Image/" + item.ImageUrl)" />
+                                    </div>
+                                </td>
+                            }
+                            <td>@item.UserName</td>
+                            <td>@item.Mobile</td>
+                            <td style="width: 5%;">@item.Email</td>
+                            <td style="width: 10%;">@item.UserAddress</td>
+                            <td>@item.PostCode</td>
+                            <td>@item.CreateDate.Value.ToString("dd/MM/yyyy")</td>
+                            @if (item.IsAdmin == true)
+                            {
+                                <td><span style="background-color: #9ab254; padding: 5px 20px; border-radius: 5px;">Manager</span></td>
+                            }
+                            else
+                            {
+                                <td><span style="background-color: #ff7f7d; padding: 5px 20px; border-radius: 5px;">User</span></td>
+                            }
+                            <td>
+                                <a href="@Url.Action("UpdateUserRole", "UserManager", new {UserID = item.UserID})" style="color: black;"><i class="fa-solid fa-pen-to-square"></i></a> /
+                                <a href="@Url.Action("DeleteUser", "UserManager", new {UserID = item.UserID})" style="color: black;"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            <p class="text-center">Page @(Model.PageCount < Model.PageCount ? 0 : Model.PageNumber) of @Model.PageCount</p>
+
+            <div class="nav justify-content-center">
+                @Html.PagedListPager(Model, page => Url.Action("ListUser", new { page = page }))
+            </div>
+
+        </div>
+    </div>
+</div>

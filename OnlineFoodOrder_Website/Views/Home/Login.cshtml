@@ -1,0 +1,43 @@
+﻿@using OnlineFoodOrder_Website.Models
+@model User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <div class="align-self-end">
+                <label></label>
+            </div>
+            <label><h2 style="font-family: 'Dancing Script', cursive;">Login</h2></label>
+
+            <span style="color: red; margin-left: 45%;">@ViewBag.Message</span>
+        </div>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div style="width: 100%; overflow: hidden;">
+                        <img src="@Url.Content("~/Content/images/banner.jpg")" />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form_container" style="margin-top: 50px;">
+                        @Html.TextBoxFor(model => model.UserName, new { @placeholder = "Enter User Name...", @class = "form-control", @required = "required" })
+                    </div>
+                    <div class="form_container" style="margin-top: 45px;">
+                        @Html.TextBoxFor(model => model.Passwords, new { @placeholder = "Enter User Name...", @class = "form-control", @required = "required", @type = "password"})
+                    </div>
+                    <div class="btn-box">
+                        <button class="btn btn-info rounded-pill pl-4 pr-4 text-white" type="submit" style="background-color: #ffbe33; border: none;">Log in</button>
+                        <label class="pl-3 text-black-100" >New User? <a href="@Url.Action("Registration", "Home")" class="badge badge-info" style="background-color: #ffbe33; border: none;">Registration here...</a></label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>>

@@ -1,0 +1,108 @@
+﻿@using OnlineFoodOrder_Website.Models
+@model Category
+
+@{
+    ViewBag.Title = "UploadImage";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<style>
+    label, th {
+        font-weight: unset;
+    }
+
+    th {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+
+<h2 style="text-align: center; font-weight: bold; margin-top: 20px;">Category Management</h2>
+
+<div style="width: 90%; margin: auto; border: 1px solid black; margin-top: 50px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+    <div class="row" style="justify-content: space-between;">
+        <div class="col-sm-4">
+            <h4 class="sub-title" style="margin-top: 60px; font-weight: bold; font-size: 20px;">Upload Category Image</h4>
+            <hr style="border: 0.5px solid grey;">
+            <div>
+                @if (Model.ImageUrl != null)
+                {
+                    <div class="form-img text-center mgbt-xs-15">
+                        <img alt="example image"
+                             src="@Url.Content("~/Image/" + Model.ImageUrl)"
+                             style="width: 100%; overflow: hidden; border-radius: 10px; height: 400px;">
+                    </div>
+                }
+                else
+                {
+                    <div class="form-img text-center mgbt-xs-15">
+                        <img alt="example image"
+                             src="@Url.Content("~/Image/ImageNull.jpg")"
+                             style="width: 100%; overflow: hidden; border-radius: 10px; height: 400px;">
+                    </div>
+                }
+
+                @using (Html.BeginForm("UploadImage", "CategoryManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(x => x.CategoryID)
+                    <div class="form-img-action text-center mgbt-xs-20" style="margin-top: 10px;">
+                        @Html.TextBox("file", "", new { type = "file", @style = "width: 100%;", @class = "vd_bg-blue" })
+                        <input type="submit" class="btn btn-success" value="Upload" style="margin-top: 10px;" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <h4 class="sub-title" style="margin-top: 60px; text-align: center; font-weight: bold; font-size: 20px;">Category List</h4>
+            <hr style="border: 0.5px solid grey;">
+            <div class="table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover nowrap">
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>CreateDate</th>
+                            <th>IsActive</th>
+                        </tr>
+                        <tr>
+                            <td>@Model.CategoryName</td>
+                            @if (Model.ImageUrl == null)
+                            {
+                                <td>
+                                    null
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="width: 25%; text-align: center;">
+                                    <div style="width: 100%; overflow: hidden;">
+                                        @if (Model.ImageUrl != null)
+                                        {
+                                            <img style="width: 100%; height: 200px;" src="@Url.Content("../Image/" + Model.ImageUrl)" alt="null" />
+
+                                        }
+                                        else
+                                        {
+                                            <span>Null</span>
+                                        }
+                                    </div>
+                                </td>
+                            }
+                            <td>@Model.CreateDate.Value.ToString("dd/MM/yyyy")</td>
+                            <td>@Model.IsActive</td>
+                        </tr>
+                    </table>
+                    <div>
+                        <button type="button" class="btn btn-outline-info" style="float: right; border: none;">@Html.ActionLink("Back to List", "AddCategory")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

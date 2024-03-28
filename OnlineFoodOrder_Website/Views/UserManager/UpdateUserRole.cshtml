@@ -1,0 +1,116 @@
+﻿@using OnlineFoodOrder_Website.Models;
+@model User
+
+@{
+    ViewBag.Title = "UpdateUserRole";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<style>
+
+    label {
+        text-align: right;
+    }
+</style>
+
+<h2 style="text-align: center; font-weight: bold; margin-top: 20px;">User Edit</h2>
+
+<div style="width: 90%; margin: auto; border: 1px solid black; margin-top: 50px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+    <div>
+        @using (Html.BeginForm("UpdateUserRole", "UserManager", FormMethod.Post))
+        {
+            <div class="form-horizontal" style="margin-top: 20px;">
+                @Html.HiddenFor(x => x.UserID)
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Full Name</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", style = "width: 90%;", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                @if (Model.ImageUrl != null)
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Image</label>
+                        <div class="col-md-10">
+                            <img src="@Url.Content("../Image/" + Model.ImageUrl)" alt="" name="txtImageUrl" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Image</label>
+                        <div class="col-md-10">
+                            <img src="@Url.Content("../Image/Avatar_Null.png")" alt="" name="txtImageUrl"/>
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">User Name</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", style = "width: 90%;", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Phone Number</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", style = "width: 90%;", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Email</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", style = "width: 90%;", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Address</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserAddress, new { htmlAttributes = new { @class = "form-control", style = "width: 90%;", @readonly = "readonly" } })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Post Code</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control", style = "width: 90%;", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Join Date</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.CreateDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "readonly", style = "width: 90%;" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Role</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsAdmin, new { htmlAttributes = new { @class = "form-control", style = "width: 90%;" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <span style="color: red;">@ViewBag.Message</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                        <a href="@Url.Action("ListUser", "UserManager")" class="btn btn-success" style="margin-left: 20px;">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

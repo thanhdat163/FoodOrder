@@ -1,0 +1,47 @@
+﻿@using OnlineFoodOrder_Website.Models
+
+@{ 
+    User user = Session["User"] as User;
+}
+
+<div class="header-right">
+    <div class="profile_details">
+        <ul>
+            <li class="dropdown profile_details_drop">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <div class="profile_img">
+                        @if (Session["User"] == null)
+                        {
+                            <span class="prfil-img"><img src="~/Content/Admin/images/2.jpg" alt=""> </span>
+                        }
+                        else
+                        {
+                            <span class="prfil-img"><img src="@Url.Content("~/Image/" + user.ImageUrl)" style="width: 50px; height: 50px;" alt=""> </span>
+                        }
+                        <div class="user-name">
+                            <p style="color: black; font-weight: bold;">@user.UserName</p>
+                            <span>Administrator</span>
+                        </div>
+                        <i class="fa fa-angle-down lnr"></i>
+                        <i class="fa fa-angle-up lnr"></i>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+
+                <ul class="dropdown-menu drp-mnu">
+                    @if (Session["User"] != null)
+                    {
+                        <li> <a href="@Url.Action("ProfileUser", "User", new {UserID = user.UserID})"><i class="fa fa-user"></i> My Profile</a> </li>
+                    }
+                    else
+                    {
+                        <li> <a href="#"><i class="fa fa-user"></i> My Profile</a> </li>
+                    }
+                    <li> <a href="@Url.Action("Index", "Home")"><i class="fa fa-suitcase"></i> Back to User Home</a> </li>
+                    <li> <a href="@Url.Action("Logout", "Home")"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="clearfix"> </div>
+</div>

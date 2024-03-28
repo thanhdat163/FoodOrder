@@ -1,0 +1,80 @@
+﻿<aside class="sidebar-left">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <h1><a class="navbar-brand" href="#"><span class="fa fa-area-chart"></span>HUTECH<span class="dashboard_text">Admin Manager</span></a></h1>
+        </div>
+        <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="sidebar-menu">
+                <li class="header">MAIN NAVIGATION</li>
+                <li class="treeview">
+                    <a href="@Url.Action("AdminHome", "Admin")">
+                       Dashboard
+                    </a>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <span>User Management</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("ListUser", "UserManager")"><i class="fa fa-angle-right"></i>User List</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <span>Category Management</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("AddCategory", "CategoryManager")"><i class="fa fa-angle-right"></i>Category List</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <span>Product Management</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("AddProduct", "ProductManager")"><i class="fa fa-angle-right"></i>Product List</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <span>Order Management</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("OrderList", "OrderManager")"><i class="fa fa-angle-right"></i>Update Status</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <span>Contact Management</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("ContactList", "ContactManager")"><i class="fa fa-angle-right"></i>Contact List</a></li>
+                    </ul>
+                </li>
+
+                <li class="header">LABELS</li>
+                <li><a href="#"><i class="fa fa-angle-right text-red"></i> <span>Important</span></a></li>
+                <li><a href="#"><i class="fa fa-angle-right text-yellow"></i> <span>Warning</span></a></li>
+                <li><a href="#"><i class="fa fa-angle-right text-aqua"></i> <span>Information</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</aside>
+  

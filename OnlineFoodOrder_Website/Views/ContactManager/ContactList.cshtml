@@ -1,0 +1,65 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList<OnlineFoodOrder_Website.Models.Contact>
+
+@{
+    ViewBag.Title = "ContactList";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+
+<style>
+    label, th {
+        font-weight: unset;
+    }
+
+    th {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+
+<h2 style="text-align: center; font-weight: bold; margin-top: 20px;">Contact Management</h2>
+
+<div style="width: 90%; margin: auto; border: 1px solid black; margin-top: 50px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+    <div class="table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover nowrap" style="margin-top: 15px;">
+                <tr>
+                    <th>Contact Name</th>
+                    <th>Email</th>
+                    <th>Subjects</th>
+                    <th>FeedBack</th>
+                    <th>Post Date</th>
+                </tr>
+                @if (Model == null)
+                {
+
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ContactName</td>
+                            <td>@item.Email</td>
+                            <td>@item.Subjects</td>
+                            <td>@item.Messagess</td>
+                            <td>@item.CreateDate.Value.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                }
+            </table>
+            <p class="justify-content-center" style="text-align: center;">Page @(Model.PageCount < Model.PageCount ? 0 : Model.PageNumber) of @Model.PageCount</p>
+            <div class="nav justify-content-center">
+                @Html.PagedListPager(Model, page => Url.Action("ContactList", new { page = page }))
+            </div>
+        </div>
+    </div>
+</div>
+
+

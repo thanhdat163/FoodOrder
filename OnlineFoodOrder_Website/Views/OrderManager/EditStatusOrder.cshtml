@@ -1,0 +1,133 @@
+﻿@using OnlineFoodOrder_Website.Models
+@model Order
+
+@{ 
+    var lstOrderByOrderNo = ViewBag.LstOrderByOrderNo as List<Order>;
+}
+
+@{
+    ViewBag.Title = "EditStatusOrder";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+<style>
+    label, th {
+        font-weight: unset;
+    }
+
+    th {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+
+<h2 style="text-align: center; font-weight: bold; margin-top: 20px;">Order Management</h2>
+
+<div style="width: 90%; margin: auto; border: 1px solid black; margin-top: 50px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+    <div class="row" style="justify-content: space-between;">
+
+        <div class="col-sm-8">
+            <h4 class="sub-title" style="margin-top: 60px; text-align: center; font-weight: bold; font-size: 20px;">Order Code: @ViewBag.OrderCode</h4>
+            <hr style="border: 0.5px solid grey;">
+            <div class="table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover nowrap">
+                        <tr>
+                            <th>Payment Mode</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach (var item in lstOrderByOrderNo)
+                        {
+                            <tr>
+                                <td>@item.Payment.PaymentMode</td>
+                                <td>@item.Product.ProductName</td>
+                                <td>@item.Product.Price</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                                @if (item.Statuss.Contains("Pending"))
+                                {
+                                    <td style="color: #ffbe33; font-weight: bold;">@item.Statuss</td>
+                                }
+                                else if (item.Statuss.Contains("Dispatcher"))
+                                {
+                                    <td style="color: #0099cc; font-weight: bold;">@item.Statuss</td>
+                                }
+                                else
+                                {
+                                    <td style="color: #2dde98; font-weight: bold;">@item.Statuss</td>
+                                }
+                                <td>
+                                    <a href="@Url.Action("EditStatusOrder", "OrderManager", new { orderDetailID = item.OrderDetailsID})" style="color: black;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h4 class="sub-title" style="margin-top: 60px; font-weight: bold; font-size: 20px; text-align: center;">Edit Status</h4>
+            <hr style="border: 0.5px solid grey;">
+            <div>
+                @using (Html.BeginForm("EditStatusOrder", "OrderManager", FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => x.OrderDetailsID)
+                    @Html.HiddenFor(x => x.OrderNo)
+                    @Html.HiddenFor(x => x.ProductID)
+                    @Html.HiddenFor(x => x.Quantity)
+                    @Html.HiddenFor(x => x.UserID)
+                    @Html.HiddenFor(x => x.PaymentID)
+                    @Html.HiddenFor(x => x.OrderDate)
+                    @Html.HiddenFor(x => x.Product.ProductName)
+
+                    <div class="form-group">
+                        <label>Order Code</label>
+                        <div>
+                            <p class="form-control" style="width: 100%;">@Model.OrderNo</p>
+                            @*@Html.EditorFor(model => model.OrderNo, new { htmlAttributes = new { @class = "form-control", style = "width: 100%;", @readonly = "readonly" } })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <div>
+                            <p class="form-control" style="width: 100%;">@Model.Product.ProductName</p>
+                            @*@Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = "form-control", style = "width: 100%;", @readonly = "readonly" } })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Order Date</label>
+                        <div>
+                            <p class="form-control">@Model.OrderDate.Value.ToString("dd/MM/yyyy")</p>
+                            @*@Html.TextBoxFor(model => model.OrderDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "readonly", style = "width: 100%;" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-check" style="padding: 0; margin-bottom: 35px; width: 100%;">
+                        <label style="margin-right: 8%;">Status</label>
+                        <div>
+                            <select style="width: 100%;" class="form-control" name="txtStatus">
+                                <option value="Pending">Pending</option>
+                                <option value="Dispatcher">Dispatcher</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pb-5" style="margin-top: 20px; display: flex; justify-content: space-between">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <a class="btn btn-primary" href="@Url.Action("OrderList", "OrderManager")">Back to List</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

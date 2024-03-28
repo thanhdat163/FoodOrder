@@ -1,0 +1,61 @@
+﻿@using OnlineFoodOrder_Website.Models
+@model User
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <div class="align-self-end">
+                <label></label>
+            </div>
+            <label><h2>User Registration</h2></label>
+
+            <span style="color: red; margin: auto;">@ViewBag.Message</span>
+        </div>
+        @using (Html.BeginForm("Registration", "Home", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_container">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @placeholder = "Enter Full Name...", @class = "form-control", @required = "required" } } )
+                    </div>
+                    <div class="form_container">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @placeholder = "Enter User Name...", @class = "form-control", @required = "required" } })
+                    </div>
+                    <div class="form_container">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "Enter Email...", @class = "form-control", @required = "required" } })
+                    </div>
+                    <div class="form_container">
+                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @placeholder = "Enter Phone Number...", @class = "form-control", @required = "required" } })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form_container">
+                        @Html.EditorFor(model => model.UserAddress, new { htmlAttributes = new { @placeholder = "Enter Address...", @class = "form-control", @required = "required" } })
+                    </div>
+                    <div class="form_container">
+                        @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @placeholder = "Enter Post/Zip Code...", @class = "form-control", @required = "required" } })
+                    </div>
+                    <div class="form_container">
+                        @Html.EditorFor(model => model.Passwords, new { htmlAttributes = new { @placeholder = "Enter Password...", @class = "form-control", @required = "required", @type = "password" } })
+                    </div>
+                    <div class="form_container">
+                        <input type="password" class="form-control" placeholder="Enter Confirm PassWord..." name="txtConfirmPassword" id="ConfirmPassword" required />
+                    </div>
+                </div>
+                <div class="row pl-4">
+                    <div class="btn-box">
+                        <button class="btn btn-info rounded-pill pl-4 pr-4 text-white" type="submit" style="background-color: #ffbe33; border: none;">Register</button>
+                        <label class="pl-3 text-black-100">Already registed? <a href="@Url.Action("Login", "Home")" class="badge badge-info" style="background-color: #ffbe33; border: none;">Login here...</a></label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</section>

@@ -1,0 +1,53 @@
+﻿@using OnlineFoodOrder_Website.Models
+@model Contact
+
+@{
+    ViewBag.Title = "BookTable";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+<!-- book section -->
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2 style="font-family: 'Dancing Script', cursive;">
+                Contact With Us
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    @using (Html.BeginForm("AddContact", "BookTable", FormMethod.Post))
+                    {
+                        <div>
+                            @Html.TextBoxFor(model => model.ContactName, new {@class = "form-control", @placeholder = "Your Name" })
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(model => model.Subjects, new { @class = "form-control", @placeholder = "Subject" })
+                        </div>
+                        <div>
+                            @Html.TextAreaFor(model => model.Messagess, new { @class = "form-control", @placeholder = "FeedBack" })
+                        </div>
+                        <div>
+                            <input type="date" class="form-control" name="txtDate">
+                        </div>
+                        <div class="btn_box">
+                            <button type="submit">
+                                Add Contact
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="map_container ">
+                    <div id="googleMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end book section -->

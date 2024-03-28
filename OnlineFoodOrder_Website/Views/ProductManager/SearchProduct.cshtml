@@ -1,0 +1,198 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<OnlineFoodOrder_Website.Models.Product>
+@using OnlineFoodOrder_Website.Models
+
+@{
+    var lstCategory = ViewBag.CategoryID as IEnumerable<Category>;
+}
+
+@{
+    ViewBag.Title = "SearchProduct";
+    Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
+}
+
+
+<style>
+    label, th {
+        font-weight: unset;
+    }
+
+    th{
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+
+<h2 style="text-align: center; font-weight: bold; margin-top: 20px;">Product Management</h2>
+
+<div style="width: 90%; margin: auto; border: 1px solid black; margin-top: 50px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+    <div class="row" style="justify-content: space-between;">
+        <div class="col-sm-3">
+            <h4 class="sub-title" style="margin-top: 60px; font-weight: bold; font-size: 20px;">Add Product</h4>
+            <hr style="border: 0.5px solid grey;">
+            <div>
+                @using (Html.BeginForm("AddProduct", "ProductManager", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <div>
+                            <input type="text" name="txtProductName" style="width: 100%" class="form-control" placeholder="Input Product Name" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div>
+                            <input type="text" name="txtDescription" style="width: 100%" class="form-control" placeholder="Input Description" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <div>
+                            <input type="text" name="txtPrice" style="width: 100%" class="form-control" placeholder="Input Price" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <div>
+                            <input type="text" name="txtQuantity" style="width: 100%" class="form-control" placeholder="Input Quantity" required />
+                        </div>
+                    </div>
+
+                    <div class="form-check" style="padding: 0; margin-bottom: 35px;">
+                        <label style="margin-right: 8%;">Category Name</label>
+                        <div>
+                            <select style="width: 100%;" class="form-control" name="txtCategoryID">
+                                @foreach (var item in lstCategory)
+                                {
+                                    <option value="@item.CategoryID">@item.CategoryName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Create Date</label>
+                        <div>
+                            <input name="txtCreateDate" class="date form-control" placeholder="Input Date Create" required />
+                        </div>
+                    </div>
+
+                    <div class="form-check" style="padding: 0; margin-bottom: 35px;">
+                        <label style="margin-right: 8%;">IsActive</label>
+                        <div>
+                            <select style="width: 100%;" class="form-control" name="txtIsActive">
+                                <option value="true">Active</option>
+                                <option value="false">Not Yet</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pb-5" style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <a class="btn btn-primary" href="@Url.Action("AddProduct", "ProductManager")">Clear</a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <h4 class="sub-title" style="margin-top: 60px; text-align: center; font-weight: bold; font-size: 20px;">Category List</h4>
+            <hr style="border: 0.5px solid grey;">
+            <div class="table-border-style">
+                <div class="table-responsive">
+                    @using (Html.BeginForm("SearchProduct", "ProductManager", FormMethod.Post))
+                    {
+                        <p style="text-align: right;">
+                            Search by name: @Html.TextBox("SearchString")
+                            <input type="submit" value="Search" class="btn btn-primary" style="padding: 5px 15px; margin-bottom: 5px;" />
+                        </p>
+                    }
+                    <table class="table table-hover nowrap">
+                        <tr>
+                            <th>ProductName</th>
+                            <th>Image</th>
+                            <th>Price ($)</th>
+                            <th>Quantity</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>CreateDate</th>
+                            <th>IsActive</th>
+                            <th>Action</th>
+                        </tr>
+                        @if (Model == null)
+                        {
+
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    @if (@item.ImageUrl == null)
+                                    {
+                                        <td style="width: 15%;">
+                                            <div style="width: 100%; overflow: hidden;">
+                                                <a href="@Url.Action("UploadImage", "ProductManager", new {ProductID = item.ProductID})"><img style="width: 100%; height: 100px;" src="@Url.Content("../Image/ImageNull.jpg")" /></a>
+                                            </div>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="width: 15%;">
+                                            <div style="width: 100%; overflow: hidden; align-items: center;">
+                                                <img style="width: 100%; height: 150px;" src="@Url.Content("../Image/" + item.ImageUrl)" />
+                                            </div>
+                                        </td>
+                                    }
+                                    <td>@item.Price</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Category.CategoryName</td>
+                                    <td style="width: 10%;">@item.Descriptions</td>
+                                    <td>@item.CreateDate.Value.ToString("dd/MM/yyyy")</td>
+                                    @if (item.IsActive == true)
+                                    {
+                                        <td><span style="background-color: #9ab254; padding: 5px 20px; border-radius: 5px;">Is Active</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span style="background-color: #ff7f7d; padding: 5px 20px; border-radius: 5px;">Not Yet</span></td>
+                                    }
+                                    <td>
+                                        <a href="@Url.Action("UpdateProduct", "ProductManager", new {ProductID = item.ProductID})" style="color: black;"><i class="fa-solid fa-pen-to-square"></i></a> /
+                                        <a href="@Url.Action("UploadImage", "ProductManager", new {ProductID = item.ProductID})" style="color: black;"><i class="fa-solid fa-image"></i></a> /
+                                        <a href="@Url.Action("DeleteProduct", "ProductManager", new {ProductID = item.ProductID})" style="color: black;"><i class="fa-solid fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+
+                    <p class="text-center">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+
+                    <div class="nav justify-content-center">
+                        @Html.PagedListPager(Model, page => Url.Action("AddProduct", new { page = page }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*==========DateTimePicker============*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $(".date").datepicker();
+    });
+</script>

@@ -1,0 +1,78 @@
+﻿@using OnlineFoodOrder_Website.Models
+@model CartItem
+
+
+@{
+    ViewBag.Title = "UpdateCart";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+<style>
+    th{
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <div class="align-self-end">
+                <label></label>
+            </div>
+            <label><h2 style="font-family: 'Dancing Script', cursive;">Update Your Cart Item</h2></label>
+        </div>
+    </div>
+    <div class="container">
+        <div class="table-border-style">
+            <div class="table-responsive">
+                @using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post)) 
+                { 
+                <table class="table table-hover nowrap">
+                    <tr>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Unit Price $</th>
+                        <th>Quantity</th>
+                        <th>Total Price $</th>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(model => model.ProductID)
+                        @Html.HiddenFor(model => model.UserID)
+                        @Html.HiddenFor(model => model.ProductName)
+                        @Html.HiddenFor(model => model.ProductImg)
+                        @Html.HiddenFor(model => model.Price)
+                        @Html.HiddenFor(model => model.ItemPriceTotal)
+                        <td>@Model.ProductName</td>
+                        <td style="width: 25%;">
+                            <div style="width: 100%; overflow: hidden;">
+                                <img style="width: 60%; height: 150px;" src="@Url.Content("../Image/" + Model.ProductImg)" />
+                            </div>
+                        </td>
+                        <td>@Model.Price</td>
+                        <td>
+                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { style = "width: 70%; height: 35px; margin: auto;", @class = "form-control" } })
+                        </td>
+                        <td>@Model.ItemPriceTotal</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a href="@Url.Action("ViewCart", "Cart", new {UserID = Model.UserID})" class="btn btn-info"><i class="fa fa-arrow-circle-left mr-2"></i>Back to Your Cart</a>
+                        </td>
+                        <td colspan="2">
+                           
+                        </td>
+                        <td colspan="2">
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-refresh mr-2"></i>Update Cart</button>
+                        </td>
+                    </tr>
+                </table>
+                }
+            </div>
+        </div>
+    </div>
+</section>
